@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BeMEAN">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular is awsome!</title>
+</head>
+
+
+<script src="script.js"></script>
+
+<body ng-controller="UserController as User">
+
+	<h1>{{ User.titulo }}</h1>
+
+	<p>
+		<label>Name:
+			<input type="text" ng-model="form.User.name">
+		</label>
+
+		<label>
+			E-mail:
+			<input type="email" ng-model="form.User.email">
+		</label>
+	</p>
+
+	<button ng-click="User.add(form.User)">ADD USER</button>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th ng-repeat="(key, value) in User.users[0]" ng-click="User.filter()">{{ key }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in User.users">
+				<td ng-repeat="(key, value) in user">
+					{{ value }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+	<ul>
+		<li ng-repeat="user in User.users">
+			<span ng-repeat="info in user">
+				{{info}}
+			</span>
+			
+		</li>
+	</ul>
+	
+
+	<div ng-controller="CursoController as Curso">
+		<h1>{{ Curso.titulo }}</h1>
+		<label for="buscaCursos">
+			Busque um curso:
+			<input type="text" ng-model="buscaCurso">
+			<br>
+		</label>
+
+	<button ng-click="Curso.add()">ADD Curso</button>
+
+
+		<table border="1">
+			<tr ng-repeat="curso in Curso.cursos | filter: buscaCurso">
+				<td>{{ curso.name }}</td>
+				<td>{{ curso.teacher }}</td>
+			</tr>
+		</table>
+	</div>	
+
+	<script src="angular.min.js"></script>
+	<script>
+
+		angular.module('BeMEAN', [])
+		.controller('UserController', UserController)
+		.controller('CursoController', CursoController);
+
+		function UserController(){
+			var vm = this;
+			vm.titulo = "Be MEAN";
+			vm.users =[
+			{name: 'Lucas', email: 'email@email.com'},
+			{name: 'Jon', email: 'jondoe@email.com'},
+			{name: 'Fulano', email: 'fulano@emal.com'}
+			];
+
+			vm.add = add;
+			vm.filter = filter;
+
+			function filter(tipo) {
+				console.log(vm.users);
+			}
+
+			function add(user){
+				vm.users.push(angular.copy(user));
+			} 
+		}
+
+
+		function CursoController(){
+			var vm = this;
+			vm.titulo = "Cursos";
+			vm.cursos =[
+			{name: 'PHP', teacher: 'Jon Doe'},
+			{name: 'Angular JS', teacher: 'Seu Madruga'},
+			{name: 'HTML 5', teacher: 'Chaves'},
+			{name: 'Node JS', teacher: 'Chiquinha'}
+			];
+
+			vm.add = add; 
+
+			function add(user){
+				console.log(user); 
+				vm.cursos.push(user);
+			} 
+		}
+
+	</script>
+</body>
+
+</html>

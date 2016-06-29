@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BeMEAN">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular is awsome!</title>
+</head>
+
+
+<script src="script.js"></script>
+
+	<body>
+
+
+		<label for="nome">
+			Nome <br>
+			<input type="text" ng-model="nome">
+		</label>
+		<br><br>
+		<label for="sobrenome">
+			Sobrenome <br>
+			<input type="text" ng-model="sobrenome">
+		</label>
+		<br><br>
+		<label for="idade">
+			Idade <br>
+			<input type="number" ng-model="idade">
+		</label>
+
+		<br><br>
+
+		<label for="sexo">
+			<input type="radio" value="Masculino" ng-model="sexo">
+			Masculino
+		</label>
+
+		<br>
+		<label for="sexo">		
+			<input type="radio" value="Feminino" ng-model="sexo">
+			Feminino
+		</label>
+
+		<hr>
+
+		<h2>Dados</h2>
+
+		<ul>
+			<li>{{nome}}</li>
+			<li>{{sobrenome}}</li>
+			<li>{{idade}}</li>
+			<li>{{sexo}}</li>
+		</ul>
+		
+
+	<script src="angular.min.js"></script>
+	<script>
+		angular.module('BeMEAN', [])
+	</script>
+	</body>
+
+</html>

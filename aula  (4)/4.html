@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BeMEAN">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular is awsome!</title>
+</head>
+
+
+<script src="script.js"></script>
+
+<body ng-controller="UserController as User">
+
+	<h1>{{ User.titulo }}</h1>
+
+	<label for="buscamemo">
+		Buscar 
+		<input type="text" ng-model="busca">
+	</label>
+
+	<span ng-init="predicate = 'idade'; reverse = true;"></span>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th ng-repeat="(key, value) in User.users[0]">{{ key }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in User.users | orderBy:predicate:reverse | filter: busca">
+				<td ng-repeat="(key, value) in user">
+					{{ value }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+	<ul>
+		<li ng-repeat="user in User.users">
+			<span ng-repeat="info in user">
+				{{info}}
+			</span>
+			
+		</li>
+	</ul>
+	
+
+	<div ng-controller="CursoController as Curso">
+		<h1>{{ Curso.titulo }}</h1>
+		<label for="buscaCursos">
+			Busque um curso:
+			<input type="text" ng-model="buscaCurso">
+			<br>
+		</label>
+
+		<table border="1">
+			<tr ng-repeat="curso in Curso.cursos | filter: buscaCurso">
+				<td>{{ curso.name }}</td>
+				<td>{{ curso.teacher }}</td>
+			</tr>
+		</table>
+	</div>	
+
+	<script src="angular.min.js"></script>
+	<script>
+
+		angular.module('BeMEAN', [])
+		.controller('UserController', UserController)
+		.controller('CursoController', CursoController);
+
+		function UserController(){
+			var vm = this;
+			vm.titulo = "Be MEAN";
+			vm.users =[
+			{name: 'Lucas', email: 'email@email.com', idade: '22'},
+			{name: 'Jon', email: 'jondoe@email.com', idade: '47'},
+			{name: 'Fulano', email: 'fulano@emal.coom', idade: '71'}
+			]
+		}
+
+
+		function CursoController(){
+			var vm = this;
+			vm.titulo = "Cursos";
+			vm.cursos =[
+			{name: 'PHP', teacher: 'Jon Doe'},
+			{name: 'Angular JS', teacher: 'Seu Madruga'},
+			{name: 'HTML 5', teacher: 'Chaves'},
+			{name: 'Node JS', teacher: 'Chiquinha'}
+			]
+		}
+
+	</script>
+</body>
+
+</html>
